@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Falcon Salads</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(120deg, #a1c4fd, #c2e9fb);
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2rem;
+      color: #5a5a5a;
+    }
+    h3 {
+      font-size: 1rem;
+      margin-bottom: 20px;
+      color: #888;
+    }
+    select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #f9f9f9;
+      transition: all 0.3s ease;
+    }
+    button {
+      background: #57c4e5;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #45b3d4;
+    }
+    .summary {
+      margin-top: 20px;
+      text-align: left;
+    }
+    .summary h3 {
+      color: #444;
+    }
+    .summary div {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .summary .total {
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #222;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Falcon Salads</h1>
+  <h3>Physically and Fiscally Satisfying</h3>
+
+  <form id="saladForm">
+    <label for="size">Choose your salad size:</label>
+    <select id="size" required>
+      <option value="" disabled selected>Select size</option>
+      <option value="s">Small ($4.00)</option>
+      <option value="m">Medium ($5.00)</option>
+      <option value="l">Large ($6.00)</option>
+    </select>
+
+    <label for="type">Choose your salad type:</label>
+    <select id="type" required>
+      <option value="" disabled selected>Select type</option>
+      <option value="g">Garden (+$1.00)</option>
+      <option value="c">Chef (+$5.00)</option>
+      <option value="k">Greek (+$4.00)</option>
+    </select>
+
+    <label for="extra">Choose your add-on:</label>
+    <select id="extra" required>
+      <option value="" disabled selected>Select add-on</option>
+      <option value="t">Tuna (+$4.00)</option>
+      <option value="m">Meat (+$4.00)</option>
+      <option value="s">Salmon (+$10.00)</option>
+      <option value="c">Chicken (+$7.50)</option>
+      <option value="n">None (+$0.00)</option>
+    </select>
+
+    <button type="button" onclick="calculateSummary()">Get Your Summary</button>
+  </form>
+
+  <div class="summary" id="summary" style="display: none;">
+    <h3>Your Order Summary</h3>
+    <div><span>Salad Size:</span> <span id="summarySize"></span></div>
+    <div><span>Salad Type:</span> <span id="summaryType"></span></div>
+    <div><span>Add-On:</span> <span id="summaryExtra"></span></div>
+    <div class="total"><span>Total Price:</span> <span id="summaryPrice"></span></div>
+  </div>
+</div>
+
+<script>
+  function calculateSummary() {
+
+    const sizes = { s: 4.00, m: 5.00, l: 6.00 };
+    const types = { g: 1.00, c: 5.00, k: 4.00 };
+    const extras = { t: 4.00, m: 4.00, s: 10.00, c: 7.50, n: 0.00 };
+
+    const size = document.getElementById("size").value;
+    const type = document.getElementById("type").value;
+    const extra = document.getElementById("extra").value;
+
+    if (!size || !type || !extra) {
+      alert("Please make all selections!");
+      return;
+    }
+
+    const sizeNames = { s: "Small", m: "Medium", l: "Large" };
+    const typeNames = { g: "Garden", c: "Chef", k: "Greek" };
+    const extraNames = { t: "Tuna", m: "Meat", s: "Salmon", c: "Chicken", n: "None" };
+
+    const totalPrice = sizes[size] + types[type] + extras[extra];
+
+    document.getElementById("summarySize").innerText = `${sizeNames[size]} ($${sizes[size].toFixed(2)})`;
+    document.getElementById("summaryType").innerText = `${typeNames[type]} ($${types[type].toFixed(2)})`;
+    document.getElementById("summaryExtra").innerText = `${extraNames[extra]} ($${extras[extra].toFixed(2)})`;
+    document.getElementById("summaryPrice").innerText = `$${totalPrice.toFixed(2)}`;
+
+    document.getElementById("summary").style.display = "block";
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercises</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #add8e6;
+      padding: 20px;
+    }
+    h2 {
+      color: darkblue;
+    }
+    .exercise-box {
+      background-color: white;
+      border: 1px solid #ccc;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    .exercise-box h2 {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+<div class="exercise-box">
+  <h2>Exercise #1: Multiply and Divide</h2>
+  <form>
+    <label for="num1">First Number:</label>
+    <input type="number" id="num1"><br><br>
+
+    <label for="num2">Second Number:</label>
+    <input type="number" id="num2"><br><br>
+
+    <button type="button" onclick="multiply()">Multiply</button>
+    <button type="button" onclick="divide()">Divide</button>
+  </form>
+
+  <p><strong>Multiplication</strong></p>
+  <p id="resultMultiply"></p>
+
+  <p><strong>Division</strong></p>
+  <p id="resultDivide"></p>
+</div>
+
+<div class="exercise-box">
+  <h2>Exercise #2: Finding HTML Elements by querySelector</h2>
+  <p>The DOM can be useful</p>
+  <p id="newclass">We are learning to use the DOM.</p>
+  <button onclick="newFunc()">Get the ID</button>
+
+  <p id="count"></p>
+</div>
+
+<div class="exercise-box">
+  <h2>Exercise #3: Change Paragraph Style</h2>
+  <p id="text">Greetings Bentley University</p>
+  <button onclick="myFunction0()">Style</button>
+</div>
+
+<script>
+  function multiply() {
+    const num1 = parseFloat(document.getElementById('num1').value);
+    const num2 = parseFloat(document.getElementById('num2').value);
+    document.getElementById('resultMultiply').innerText = (num1 * num2).toFixed(2);
+  }
+
+  function divide() {
+    const num1 = parseFloat(document.getElementById('num1').value);
+    const num2 = parseFloat(document.getElementById('num2').value);
+    if (num2 !== 0) {
+      document.getElementById('resultDivide').innerText = (num1 / num2).toFixed(2);
+    } else {
+      document.getElementById('resultDivide').innerText = "Division by zero is not allowed.";
+    }
+  }
+
+  function newFunc() {
+    const paragraphs = document.querySelectorAll('p');
+    paragraphs.forEach(p => p.style.color = 'purple');
+
+    const countText = `Number of selected elements: ${paragraphs.length}`;
+    document.getElementById('count').innerText = countText;
+
+    const newClassElement = document.querySelector('#newclass');
+    newClassElement.innerText += " (ID text displayed)";
+  }
+
+  function myFunction0() {
+    const paragraph = document.getElementById('text');
+    paragraph.style.color = 'green';
+    paragraph.style.fontSize = '24pt';
+    paragraph.style.fontFamily = "Comic Sans MS";
+  }
+</script>
+
+<div class="exercise-box" id="aboutMeBox">
+  <h2>Exercise #4: About Me</h2>
+  <h1>About Me</h1>
+  <ul>
+    <li>Nickname: <span id="nickname"></span></li>
+    <li>Favorites: <span id="favorites"></span></li>
+    <li>Hometown: <span id="hometown"></span></li>
+  </ul>
+  <button onclick="updateAboutMe()">Change me!</button>
+</div>
+
+<div class="exercise-box">
+  <h2>Exercise #5: Changing Logos</h2>
+  <h3>Changing logos</h3>
+  <img id="logo" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google Logo">
+  <br><br>
+  <button onclick="changeLogo()">Change Image</button>
+</div>
+
+<script>
+  function updateAboutMe() {
+    document.getElementById('nickname').innerText = "Francisco";
+    document.getElementById('favorites').innerText = "Dogs";
+    document.getElementById('hometown').innerText = "Sao Paulo, SP, Brazil";
+
+    const img = document.createElement('img');
+    img.src = "IMAGES/KIKO_FOTO.jpg";
+    img.alt = "Francisco";
+    img.style.width = "200px";
+
+    const box = document.getElementById('aboutMeBox'); // Use a unique ID
+    box.appendChild(img);
+  }
+
+  function changeLogo() {
+    const logo = document.getElementById('logo');
+    logo.src = "https://upload.wikimedia.org/wikipedia/commons/6/66/Yahoo%21_logo.png";
+    logo.alt = "Yahoo Logo";
+  }
+  </script>
+
+</body>
+</html>
